@@ -4,31 +4,31 @@
 
 ```mermaid
 erDiagram
-	direction TB
-	LIBRO {
-		int id_libro PK ""  
-		string titulo  ""  
-		string autores  "" 
-    date año_publicacion 
-	}
+    direction TB
 
-	USUARIO {
-		int id_uSuario PK ""  
-		string nombre  ""  
-		string direccion  ""  
-		int telefono  ""  
-	}
+    LIBRO {
+        int id_libro PK
+        string titulo
+        string autores
+        date ano_publicacion
+    }
 
-	PRESTAMO {
-		int id_prestamo PK ""  
-		int id_usuario PK, FK ""  
-		int id_libro PK, FK ""  
-		date fecha_prestamo  ""  
-		date fecha_devolucion  ""  
-	}
+    USUARIO {
+        int id_usuario PK
+        string nombre
+        string direccion
+        int telefono
+    }
+
+    PRESTAMO {
+        int id_usuario FK
+        int id_libro FK
+        date fecha_prestamo
+        date fecha_devolucion
+    }
 
     USUARIO ||--|{ PRESTAMO : solicita
-    LIBRO }|--|{ PRESTAMO : tiene 
+    LIBRO ||--|{ PRESTAMO : incluye
 ```
 
 ![biblioteca](biblioteca.png)
@@ -36,31 +36,35 @@ erDiagram
 ## 2. Compra
 ```mermaid
 erDiagram
-	direction TB
-	PRODUCTO {
-		int id_producto PK ""  
-		string nombre  ""  
-		int precio  "" 
-    int stock
-	}
+    CLIENTE {
+        int id_cliente PK
+        string nombre
+        string correo
+        int telefono
+    }
 
-	CLIENTE {
-		int id_cliente PK ""  
-		string nombre  ""  
-		string correo  ""  
-		int telefono  ""  
-	}
+    FACTURA {
+        int id_factura PK
+        date fecha_venta
+        int id_cliente FK
+    }
 
-	FACTURA {
-		int id_factura PK ""  
-		date fecha_venta  ""  
-		int cantidad_comprada ""  
-    int id_cliente PK, FK
-    int id_producto PK, FK
-	}
+    PRODUCTO {
+        int id_producto PK
+        string nombre
+        int precio
+        int stock
+    }
 
-    CLIENTE ||--|{ FACTURA : tener
-    FACTURA }|--|{ PRODUCTO : tiene 
+    DETALLE_FACTURA {
+        int id_factura  FK
+        int id_producto  FK
+        int cantidad_comprada
+    }
+
+    CLIENTE ||--o{ FACTURA : realiza
+    FACTURA ||--|{ DETALLE_FACTURA : contiene
+    PRODUCTO ||--|{ DETALLE_FACTURA : aparece_en
 ```   
 ![compra](compra.png)
 
@@ -73,7 +77,7 @@ FACTURA es la entidad asociativa porque resuelve la relación muchos a muchos (M
 erDiagram
 	direction TB
 	MATRICULA {
-		int id_matricula PK ""  
+		int id_matricula UK ""  
 		string semestre  ""  
 		double nota_final  "" 
     int id_estudiante FK
