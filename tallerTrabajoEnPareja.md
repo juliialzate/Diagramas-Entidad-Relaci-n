@@ -77,3 +77,4 @@ erDiagram
 
 ### Punto c
 ![puntoC](puntoC.png)
+![tablasC](tablasC.png)
