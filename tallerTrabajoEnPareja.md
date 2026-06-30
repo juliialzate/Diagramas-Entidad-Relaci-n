@@ -169,64 +169,76 @@ erDiagram
 ### Punto c
 ![puntoC](puntoC.png)
 ```mermaid
+
 erDiagram
-    Fabricante {
+    CLIENTE ||--o{ ORDEN_COMPRA : "realiza"
+    ORDEN_COMPRA ||--o{ DETALLE_ORDEN : "contiene"
+    PRODUCTO ||--o{ DETALLE_ORDEN : "incluido_en"
+    FABRICANTE ||--o{ PRODUCTO : "fabrica"
+    PRODUCTO ||--o| COMPUTADORES : "es_un"
+    PRODUCTO ||--o| TABLETAS : "es_un"
+    PRODUCTO ||--o| TELEFONOS_INTELIGENTES : "es_un"
+    PRODUCTO ||--o| RELOJES : "es_un"
+
+    CLIENTE {
+        int id_cliente PK
+        string nombre
+    }
+
+    ORDEN_COMPRA {
+        int id_orden_compra PK
+        date fecha
+        string estado
+        int id_cliente FK
+    }
+
+    DETALLE_ORDEN {
+        int numero PK
+        string codigo
+        int cantidad
+        int id_orden_compra FK
+        int id_producto FK
+    }
+
+    FABRICANTE {
         int id_fabricante PK
         string nombre
         string pais
         string sitio_web
     }
 
-    Producto {
-        int codigo PK
+    PRODUCTO {
+        int id_producto PK
         string nombre
-        string tipo
+        string dispositivo
+        string infoProducto
         decimal precio
         int cantidad_stock
         int id_fabricante FK
     }
 
-    Cliente {
-        int id_cliente PK
-        string nombre
+    COMPUTADORES {
+        int id_producto PK
+        string tamano_pantalla
+        string ram
+        string tipo
     }
 
-    OrdenDeCompra {
-        int numero PK
-        date fecha
-        string estado
-        int id_cliente FK
+    TABLETAS {
+        int id_producto PK
+        boolean lapiz_tactil
     }
 
-    DetalleOrden {
-        int numero FK
-        int codigo FK
-        int cantidad
-    }
-
-	Computadores {
-        int tamaño_pantalla
-		int ram
-		string tipo
-    }
-
-	Tabletas {
-        string lapiz_tactil
-    }
-
-	TelefonosInteligentes {
+    TELEFONOS_INTELIGENTES {
+        int id_producto PK
         string sim
     }
 
-	relojes {
-        string resistencia_agua
-		
+    RELOJES {
+        int id_producto PK
+        boolean resistencia_agua
+        boolean tiene_gps
+        string compatibilidad
     }
 
-
-
-    Fabricante ||--|{ Producto : fabrica
-    Cliente ||--|{ OrdenDeCompra : realiza
-    OrdenDeCompra ||--|{ DetalleOrden : contiene
-    Producto ||--|{ DetalleOrden : aparece
 ```
