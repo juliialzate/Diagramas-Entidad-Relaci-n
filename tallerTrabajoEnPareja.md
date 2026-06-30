@@ -73,6 +73,7 @@ erDiagram
 ![puntoA](puntoA.png)
 
 ### Punto b
-
+![puntoB](puntoB.png)
 
 ### Punto c
+![puntoC](puntoC.png)
