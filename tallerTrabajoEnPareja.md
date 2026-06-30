@@ -69,6 +69,7 @@ erDiagram
 
 
 ### Punto a 
+![puntoA](puntoA.png)
 ```mermaid
 erDiagram
     Fabricante {
@@ -112,13 +113,13 @@ erDiagram
     Cliente ||--|{ OrdenDeCompra : realiza
     OrdenDeCompra ||--|{ DetalleOrden : contiene
     Producto ||--|{ DetalleOrden : aparece
-
-![puntoA](puntoA.png)
 ```
+
+
 
 ### Punto b
 ![puntoB](puntoB.png)
-```
+```mermaid
 erDiagram
     Fabricante {
         int id_fabricante PK
@@ -163,8 +164,11 @@ erDiagram
     OrdenDeCompra ||--|{ DetalleOrden : contiene
     Producto ||--|{ DetalleOrden : aparece
 ```
+
+
 ### Punto c
 ![puntoC](puntoC.png)
+```mermaid
 erDiagram
     Fabricante {
         int id_fabricante PK
@@ -225,3 +229,4 @@ erDiagram
     Cliente ||--|{ OrdenDeCompra : realiza
     OrdenDeCompra ||--|{ DetalleOrden : contiene
     Producto ||--|{ DetalleOrden : aparece
+```
