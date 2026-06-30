@@ -6,63 +6,66 @@
 
 ```mermaid
 erDiagram
-  AUTOR ||--o{ ESCRITO_POR : ""
-  LIBRO ||--o{ ESCRITO_POR : ""
-  EDITOR ||--o{ LIBRO : "edita"
-  LIBRO ||--o{ CONTIENE : ""
-  CESTA_DE_LA_COMPRA ||--o{ CONTIENE : ""
-  CLIENTE ||--o{ CESTA_DE_LA_COMPRA : "tiene"
-  LIBRO ||--o{ ALMACENA : ""
-  ALMACEN ||--o{ ALMACENA : ""
+    AUTOR {
+        string nombre PK
+        string direccion PK
+    }
 
-  AUTOR {
-    string nombre PK
-    string direccion
-    string URL
-  }
-  EDITOR {
-    string nombre PK
-    string direccion
-    string telefono
-    string URL
-  }
-  LIBRO {
-    string ISBN PK
-    string titulo
-    int anio
-    decimal precio
-    string editor_nombre FK
-  }
-  ESCRITO_POR {
-    string autor_nombre PK_FK
-    string ISBN PK_FK
-  }
-  CLIENTE {
-    string nombre PK
-    string direccion
-    string telefono
-    string correo_electronico
-  }
-  CESTA_DE_LA_COMPRA {
-    string IDcesta PK
-    string cliente_nombre FK
-  }
-  CONTIENE {
-    string ISBN PK_FK
-    string IDcesta PK_FK
-    int numero
-  }
-  ALMACEN {
-    string numero PK
-    string direccion
-    string telefono
-    string codigo
-  }
-  ALMACENA {
-    string ISBN PK_FK
-    string almacen_numero PK_FK
-    int numero
-  }
+    EDITOR {
+        string nombre PK
+        string direccion
+        string telefono
+        string URL
+    }
+
+    LIBRO {
+        string ISBN PK
+        string titulo
+        int anio
+        float precio
+        string nombre_autor FK
+        string direccion_autor FK
+        string nombre_editor FK
+    }
+
+    CLIENTE {
+        string nombre PK
+        string direccion PK
+        string direccion_correo_electronico
+        string telefono
+    }
+
+    CESTA_DE_LA_COMPRA {
+        string IDcesta PK
+        string nombre_cliente FK
+        string direccion_cliente FK
+    }
+
+    ALMACEN {
+        string codigo PK
+        string direccion
+        string telefono
+    }
+
+    CONTIENE {
+        string ISBN_libro PK,FK
+        string IDcesta PK,FK
+        int numero
+    }
+
+    ALMACENA {
+        string ISBN_libro PK,FK
+        string codigo_almacen PK,FK
+        int numero
+    }
+
+    AUTOR ||--o{ LIBRO : "escrito-por"
+    EDITOR ||--o{ LIBRO : "editado-por"
+    CLIENTE ||--o{ CESTA_DE_LA_COMPRA : "cesta-de"
+    LIBRO ||--o{ CONTIENE : ""
+    CESTA_DE_LA_COMPRA ||--o{ CONTIENE : ""
+    LIBRO ||--o{ ALMACENA : ""
+    ALMACEN ||--o{ ALMACENA : ""
 ```
 
 ## Ejercicio propuesto
