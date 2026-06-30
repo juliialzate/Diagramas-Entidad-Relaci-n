@@ -69,12 +69,159 @@ erDiagram
 
 
 ### Punto a 
+```mermaid
+erDiagram
+    Fabricante {
+        int id_fabricante PK
+        string nombre
+        string pais
+        string sitio_web
+    }
+
+    Producto {
+        int codigo PK
+        string nombre
+        string tipo
+        decimal precio
+        int cantidad_stock
+        int id_fabricante FK
+    }
+
+    Cliente {
+        int id_cliente PK
+        string nombre
+    }
+
+    OrdenDeCompra {
+        int numero PK
+        date fecha
+        string estado
+        int id_cliente FK
+    }
+
+    DetalleOrden {
+        int numero FK
+        int codigo FK
+        int cantidad
+    }
+
+
+
+
+    Fabricante ||--|{ Producto : fabrica
+    Cliente ||--|{ OrdenDeCompra : realiza
+    OrdenDeCompra ||--|{ DetalleOrden : contiene
+    Producto ||--|{ DetalleOrden : aparece
 
 ![puntoA](puntoA.png)
+```
 
 ### Punto b
 ![puntoB](puntoB.png)
+```
+erDiagram
+    Fabricante {
+        int id_fabricante PK
+        string nombre
+        string pais
+        string sitio_web
+    }
 
+    Producto {
+        int codigo PK
+        string nombre
+        string tipo
+        decimal precio
+        int cantidad_stock
+        int id_fabricante FK
+        string caracteristica_dispositivo
+    }
+
+    Cliente {
+        int id_cliente PK
+        string nombre
+    }
+
+    OrdenDeCompra {
+        int numero PK
+        date fecha
+        string estado
+        int id_cliente FK
+    }
+
+    DetalleOrden {
+        int numero FK
+        int codigo FK
+        int cantidad
+    }
+
+
+
+
+    Fabricante ||--|{ Producto : fabrica
+    Cliente ||--|{ OrdenDeCompra : realiza
+    OrdenDeCompra ||--|{ DetalleOrden : contiene
+    Producto ||--|{ DetalleOrden : aparece
+```
 ### Punto c
 ![puntoC](puntoC.png)
-![tablasC](tablasC.png)
+erDiagram
+    Fabricante {
+        int id_fabricante PK
+        string nombre
+        string pais
+        string sitio_web
+    }
+
+    Producto {
+        int codigo PK
+        string nombre
+        string tipo
+        decimal precio
+        int cantidad_stock
+        int id_fabricante FK
+    }
+
+    Cliente {
+        int id_cliente PK
+        string nombre
+    }
+
+    OrdenDeCompra {
+        int numero PK
+        date fecha
+        string estado
+        int id_cliente FK
+    }
+
+    DetalleOrden {
+        int numero FK
+        int codigo FK
+        int cantidad
+    }
+
+	Computadores {
+        int tamaño_pantalla
+		int ram
+		string tipo
+    }
+
+	Tabletas {
+        string lapiz_tactil
+    }
+
+	TelefonosInteligentes {
+        string sim
+    }
+
+	relojes {
+        string resistencia_agua
+		
+    }
+
+
+
+    Fabricante ||--|{ Producto : fabrica
+    Cliente ||--|{ OrdenDeCompra : realiza
+    OrdenDeCompra ||--|{ DetalleOrden : contiene
+    Producto ||--|{ DetalleOrden : aparece
