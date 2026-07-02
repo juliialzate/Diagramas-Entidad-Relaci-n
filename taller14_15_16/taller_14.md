@@ -35,5 +35,5 @@ curso_instructor → para representar la relación entre cursos e instructores.*
 
 ## 3 y 4. 
 
-
+![punto1logico](punto1logico.png)
 ![punto1](punto1.png)
