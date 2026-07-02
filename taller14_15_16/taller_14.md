@@ -1,19 +1,19 @@
 # Taller 14
-
-## 1. La información repetida es:
+## Punto 1 
+### 1. La información repetida es:
 
 Curso: "Inglés Básico" aparece en tres registros y "Excel Avanzado" aparece en dos registros.
 Instructor: "Carlos Pérez" se repite tres veces y "Laura Gómez" se repite dos veces.
 
 
-## 2. La redundancia puede ocasionar los siguientes problemas:
+### 2. La redundancia puede ocasionar los siguientes problemas:
 
 Desperdicio de espacio: Se almacena la misma información varias veces.
 Inconsistencia de datos: Si cambia el nombre de un instructor, debe actualizarse en todos los registros. Si se olvida alguno, habrá información diferente para el mismo instructor.
 Mayor riesgo de errores: Al ingresar los datos manualmente pueden escribirse nombres distintos para el mismo curso o instructor.
 Mayor dificultad para el mantenimiento: Las actualizaciones requieren modificar varios registros en lugar de uno solo.
 
-## 3.Para eliminar la redundancia de datos en la base de datos de la academia de idiomas, se realizó una normalización del modelo separando la información en entidades independientes y utilizando tablas intermedias para representar las relaciones muchos a muchos.
+### 3.Para eliminar la redundancia de datos en la base de datos de la academia de idiomas, se realizó una normalización del modelo separando la información en entidades independientes y utilizando tablas intermedias para representar las relaciones muchos a muchos.
 
 Se identificaron tres entidades principales:
 
@@ -33,7 +33,14 @@ Se crearon dos tablas intermedias:
 estudiante_curso → para representar la relación entre estudiantes y cursos.
 curso_instructor → para representar la relación entre cursos e instructores.**
 
-## 3 y 4. 
+### 3 y 4. 
 
 ![punto1logico](punto1logico.png)
 ![punto1](punto1.png)
+
+
+## Punto 2
+![punto2logico](punto2logico.png)
+![punto2](punto2.png)
+
+
