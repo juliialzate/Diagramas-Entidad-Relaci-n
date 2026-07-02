@@ -44,3 +44,8 @@ curso_instructor → para representar la relación entre cursos e instructores.*
 ![punto2](punto2.png)
 
 
+## Punto 3
+La combinación de las tablas se realiza mediante una operación JOIN, que permite relacionar registros de dos o más tablas utilizando una columna en común.
+
+
+
