@@ -1,10 +1,10 @@
 CREATE TABLE BANCO 
     ( 
      codigo_banco            INTEGER  NOT NULL , 
-     nombre                  VARCHAR (4000) , 
+     nombre                  VARCHAR (255) , 
      tasa_interes            DOUBLE , 
      comision_administracion DOUBLE , 
-     PAIS_codigo_pais        VARCHAR (4000) 
+     PAIS_codigo_pais        VARCHAR (255) 
     ) 
 ;
 
@@ -46,7 +46,7 @@ ALTER TABLE CREDITO_MONEDA
 CREATE TABLE EMPRESA 
     ( 
      codigo_empresa                   INTEGER  NOT NULL , 
-     nombre                           VARCHAR (4000) , 
+     nombre                           VARCHAR (255) , 
 --  ERROR: Column name length exceeds maximum allowed length(30) 
      CARACTER_EMPRESA_codigo INTEGER , 
      GRUPO_EMPRESA_codigo_grupo       INTEGER 
@@ -59,7 +59,7 @@ ALTER TABLE EMPRESA
 CREATE TABLE GRUPO_EMPRESA 
     ( 
      codigo_grupo INTEGER  NOT NULL , 
-     grupo        VARCHAR (4000) 
+     grupo        VARCHAR (255) 
     ) 
 ;
 
@@ -93,7 +93,7 @@ ALTER TABLE MONEDA_PAIS
 CREATE TABLE PAIS 
     ( 
      codigo_pais VARCHAR (10)  NOT NULL , 
-     pais        VARCHAR (4000) 
+     pais        VARCHAR (255) 
     ) 
 ;
 
