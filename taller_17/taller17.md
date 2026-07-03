@@ -316,9 +316,9 @@ Sí. La información puede recuperarse realizando un JOIN entre las dos tablas u
 #### 3. ¿Se trata de una descomposición sin pérdida? Justifique.  
 
 Sí, es una descomposición sin pérdida, porque al unir las dos tablas mediante Código_Curso se recuperan exactamente los mismos datos de la relación original
-![LogicoTema5.1](relacion5.2.png)
+![LogicoTema5.1](logico5.1.png)
 
-![RelacionalTema4](relacional5.1.png)
+![RelacionalTema5.1](relacional5.1.png)
 ### Ejercicio 2
 
 #### 1. Descomponga la relación en tablas más pequeñas.  
@@ -354,7 +354,7 @@ Esta descomposición mejora el diseño porque:
 
 ![logico5.2](logico5.2.png)
 
-![RelacionalTema4](relacional5.2 (2).png)
+![RelacionalTema4](drelacional5.2.png)
 ## Pregunta de reflexión 
 
 ### ¿Por qué la normalización y la descomposición son fundamentales para diseñar bases de datos eficientes? Mencione al menos cuatro beneficios y apoye su respuesta con un ejemplo. 
