@@ -69,7 +69,7 @@ ALTER TABLE GRUPO_EMPRESA
 CREATE TABLE MONEDA 
     ( 
      codigo_moneda INTEGER  NOT NULL , 
-     nombre_moneda VARCHAR (4000)  
+     nombre_moneda VARCHAR (255)  
 --  ERROR: Datatype UNKNOWN is not allowed 
 	
     ) 
@@ -81,7 +81,7 @@ ALTER TABLE MONEDA
 CREATE TABLE MONEDA_PAIS 
     ( 
      MONEDA_codigo_moneda INTEGER  NOT NULL , 
-     PAIS_codigo_pais     VARCHAR (4000)  NOT NULL , 
+     PAIS_codigo_pais     VARCHAR (255)  NOT NULL , 
      tasa_cambio          DOUBLE , 
      porcentaje_cambio    DOUBLE 
     ) 
