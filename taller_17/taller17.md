@@ -142,6 +142,36 @@ Si la especialidad de Pedro Ruiz cambia (por ejemplo, de Cardiología a Medicina
 - Podrían existir registros donde el mismo médico tenga dos especialidades diferentes. 
 - Se generaría inconsistencia de datos, ya que la información no sería uniforme en toda la tabla.
 
+#### 3.Descomposicion resultante
+## Tabla Médico
+
+| Id_medico | Medico      | Especialidad |
+|------------|-------------|--------------|
+| 1          | Pedro Ruiz  | Cardiología  |
+
+## Tabla Paciente
+
+| Id_paciente | Paciente |
+|--------------|----------|
+| 1            | Ana      |
+| 2            | Juan     |
+| 3            | Laura    |
+
+## Tabla Habitación
+
+| Id_habitación | Habitación |
+|----------------|------------|
+| 201            | 201        |
+| 202            | 202        |
+| 203            | 203        |
+
+## Tabla Asignación
+
+| Id_medico | Id_paciente | Id_habitacion |
+|------------|--------------|----------------|
+| 1          | 1            | 201            |
+| 1          | 2            | 202            |
+| 1          | 3            | 203            |
 ## Tema 4. Descomposición de Relaciones 
 
 ### Ejercicio 1
