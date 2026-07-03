@@ -222,9 +222,9 @@ Inscripción
 
 #### 3. Dibuje el esquema relacional resultante.  
 
-![LogicoTema4](logico4.1.png)
+![LogicoTema4](LogicoTema4.png)
 
-![RelacionalTema4](relacional4.1.png)
+![RelacionalTema4](RelacionalTema4.png)
 
 
 ### Ejercicio 2
@@ -316,7 +316,7 @@ Sí. La información puede recuperarse realizando un JOIN entre las dos tablas u
 #### 3. ¿Se trata de una descomposición sin pérdida? Justifique.  
 
 Sí, es una descomposición sin pérdida, porque al unir las dos tablas mediante Código_Curso se recuperan exactamente los mismos datos de la relación original
-![LogicoTema4](logico5.1.png)
+![LogicoTema5.1](relacion5.2.png)
 
 ![RelacionalTema4](relacional5.1.png)
 ### Ejercicio 2
@@ -352,9 +352,9 @@ Esta descomposición mejora el diseño porque:
 - Elimina la redundancia de datos, ya que la información de los autores y las editoriales se almacena una sola vez. 
 - Reduce las inconsistencias, porque si cambia el nombre de un autor o de una editorial, solo es necesario actualizar un registro.
 
-![LogicoTema4](logico5.2.png)
+![logico5.2](logico5.2.png)
 
-![RelacionalTema4](relacional5.2.png)
+![RelacionalTema4](relacional5.2 (2).png)
 ## Pregunta de reflexión 
 
 ### ¿Por qué la normalización y la descomposición son fundamentales para diseñar bases de datos eficientes? Mencione al menos cuatro beneficios y apoye su respuesta con un ejemplo. 
