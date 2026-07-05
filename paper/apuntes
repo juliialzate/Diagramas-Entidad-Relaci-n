@@ -1,0 +1,318 @@
+La normalización es la transformación de las vistas de
+usuario complejas y del almacén de datos a un juego de
+estructuras de datos más pequeñas y estables. Además
+de ser más simples, las estructuras de datos son más faciles de mantener
+
+La normalización surgió como respuesta a las limitaciones
+del enfoque tradicional de almacenar toda la información
+en un único archivo o tabla, lo cual resultaba ineficiente y
+propenso a errores lógicos durante el manejo de los datos
+[8]. Este proceso se estructura en distintas etapas, cada
+
+El proceso de normalización fue introducido en 1970 por
+el científico inglés Edgar Frank Codd, quien definió el
+modelo relacional y la Primera Forma Normal (1FN), como
+se expone en su artículo La teoría de la normalización
+para el diseño de bases de datos relacionales [4]. Un año
+más tarde, en 1971, Codd amplió su propuesta al
+incorporar la Segunda y Tercera Forma Normal (2FN y
+3FN). Sin embargo, estas formas no resolvian
+completamente los problemas de redundancia, por lo que,
+en 1974, en colaboración con R.F. Boyce, presentó una
+forma adicional conocida como la Forma Normal de
+Boyce-Codd (FNBC), considerada una versión más
+restrictiva de la 3FN [4][5][9].
+
+la normalizacion toma en cuenta la redundancia , ademas de reducir anomalias favorece estructuras de datos mas estables, un esquema normalizado es robusto carece de redundancia 
+
+Una relación está en 1FN si sus atributos no tienen
+dominios que, a su vez, sean conjuntos, o dicho de otra
+manera, para que una relación esté en 1FN todos sus
+atributos deben tener un solo valor (ser atómicos). Para
+conseguir que una relación esté en 1FN se debe excluir
+de la relación los atributos que no estén en 1FN, los cuales
+pasarán a almacenarse en una o varias nuevas
+relaciones. En esas relaciones también se almacenará la
+clave primaria de la relación inicial [2].
+Además, es necesario tener claro que para que una
+relación esté en 1FN es necesario conocer el concepto de
+dependencia funcional. Una dependencia funcional en
+una relación que se da entre dos atributos x e y, cuando
+cada valor de x tiene asociado un solo valor de y [3]. Por
+ejemplo, si se quiere calcular la edad de una persona, en
+años, se necesita conocer la fecha de nacimiento. En este
+caso existe una dependencia funcional del valor de la
+
+
+Las reglas para normalizar una tabla de una base de datos
+en primera forma normal se listan a continuación:
+· Todas las tablas deben tener una clave primaria
+(así se evitan redundancias).
+. Todos los campos deben
+(almacenar un solo valor).
+· No deben existir campos nulos.
+. No debe existir variación en el número de
+columnas de la tabla.
+· Los campos que no son clave deben identificarse
+por la clave (dependencia funcional).
+· Debe existir una independencia del orden tanto
+de las filas como de las columnas (si se cambia
+el orden de los datos, no debe cambiar su
+significado) [5].
+
+ser
+
+atómicos
+
+Segunda forma normal (2FN):
+
+Una relación está en 2FN si está en 1FN y, además, cada
+atributo que no sea clave depende de forma funcional
+completa a su clave primaria [5]. Esto se hace con el
+propósito de elegir las claves correctas y eliminar
+redundancias, es decir si las claves están formadas por un
+único atributo ese esquema habrá alcanzado la segunda
+forma normal, por lo tanto se controlan la mayoría de los
+problemas de lógica [3].
+En resumen, para que una relación esté en la segunda
+forma normal, esta únicamente debe cumplir con dos
+reglas, una de ellas es que debe estar normalizada en la
+primera forma normal y la otra regla es que los campos
+que no forman parte de ninguna clave dependen de forma
+completa de la clave primaria. Es decir, no deben existir
+dependencias parciales. Una dependencia parcial es un
+término que describe a aquellos datos que no dependen
+de la clave primaria de la tabla para identificarlos [5].
+
+
+Tercera forma normal (3FN):
+
+Una relación está en 3FN si está en 2FN y, además, no
+tiene dependencias funcionales transitivas entre la clave
+primaria y sus atributos que no participen en una clave
+alternativa, dicho de otra forma, cuando no ocurre que un
+atributo dependa funcionalmente de otro/s atributo/s que
+no sea/s clave primaria [2].
+Considerando que la 3FN especifica que no tiene
+dependencias transitivas, es necesario definir que una
+dependencia transitiva es aquella en la cual existen
+columnas que no son clave que dependen de otras
+columnas que tampoco lo son. Por tal razón para pasar al
+nivel 3 de normalización se debe eliminar aquellos
+campos que no dependan directamente de la clave.
+
+
+Como resultado de esto cuando las tablas están en la
+tercera forma normal se previenen errores de logica
+cuando se insertan o borran registros. Cada columna en
+una tabla está identificada de manera única por la llave
+primaria, y no debe haber datos repetidos. Esto
+proporciona un esquema limpio y elegante, que es facil de
+trabajar y expandir [3].
+La normalización hasta la tercera forma normal es un
+proceso que debe realizarse, después de realizar un
+diseño preliminar de las tablas de una base de datos. Se
+debe recordar que con la normalización se evitarán
+muchos problemas de anomalias y hará que la base de
+datos sea mas fácil de mantener al momento de ampliarla
+[5].
+
+Forma normal de Boyce-Codd (FNBC):
+
+Como se ha anticipado anteriormente, las tres formas
+normales fueron descritas por Codd, en 1970. No
+obstante, estas planteaban algunos problemas, asi que
+cuatro años más tarde, Boyce y Codd redefinen la 3FN (de
+ahi el nombre de FNBC). Una relación está en FNBC si
+cada determinante es una clave candidata [2].
+Esta forma normal especial se creo con la intención de
+mejorar los problemas que se presentaron en la tercera
+forma normal, aunque hay que tener claro que sigue
+siendo tercera forma normal. Para aplicar la FNBC, es
+necesario considerar dos aspectos importantes cuando se
+habla de Forma Normal de Boyce y Codd (FNBC):
+
+. Para que una relación esté en FNBC
+primeramente debe estar en 3FN, de lo contrario,
+no es posible que esto suceda.
+No siempre es recomendable aplicar esta forma
+normal, ya que en ocasiones se pierden
+dependencias funcionales tomando en cuenta
+que una dependencia funcional se refiere que un
+atributo Y de una relación depende de otro
+atributo X de la relacion para que sea funcional.
+
+Otras formas normales (4FN, 5FN)
+
+A continuación, se describen a manera resumida la cuarta
+forma normal (4FN) y la quinta forma normal (5FN):
+
+Cuarta Forma Normal (4FN)
+
+Se dice que una relación está en 4FN si se encuentra en
+3FN y, además, las únicas dependencias funcionales
+multivaluadas son aquellas que dependen de claves
+candidatas [2].
+
+Quinta Forma Normal (5FN)
+
+Una relación esta en 5FN si se encuentra en 4FN y.
+ademas, toda dependencia de union es consecuencia de
+las claves candidatas [2].
+Con el propósito de comprender mejor el proceso de
+normalización, a continuación se presenta un ejemplo de
+elaboración propla relacionado con la normalización en
+primera, segunda y tercera forma normal, como se ha
+mencionado anteriormente en este articulo con el
+siguiente enunciado:
+La empresa "Aries Tech" esta dedicada a la venta de
+equipos de computo y accesorios al por mayor y al detalle,
+por lo que la gerencia necesita implementar en su sistema
+un modulo de creditos para sus clientes recurrentes. Con
+base en los conceptos de normalización mencionados, se
+procede a realizar los pasos necesarios para normalizar la
+tabla del módulo de créditos.
+
+· Tabla del módulo de crédito sin normalizar:
+En la Figura 2 se muestra una única tabla que contiene
+toda la información sobre cliente, producto y crédito.
+------
+
+-----
+
+-
+
+Figura 2. Tabla sin normalizar
+. Primera forma normal
+En la 1FN cada celda de la tabla contiene un solo valor
+para esto, se dividirá la tabla en tres tablas separadas:
+"Clientes," "Productos," y "Credito", como se muestra a
+continuación
+
+KSEK BEKE
+
+Cale pricipil. Chdad C
+
+Aw Principal, Chdad M
+
+Figura 3. Cliente
+
+ld_crodito
+
+Figura 4. Producto
+
+ld chemc
+
+Facta
+
+2023-09-13
+
+2023-08-19
+
+2073-08-18
+
+Tota
+
+1700
+
+Figura 5. Credito
+
+· Segunda forma normal
+
+En 2FN, primeramente, se normalizó la tabla del módulo
+de crédito a la 1FN, posteriormente se verifica que todos
+los atributos dependan completamente de la clave
+primaria para que esto se cumpla, se agrega una nueva
+tabla llamada "Detalles_crédito" para separar los detalles
+de los créditos.
+Id credito
+
+Id_producto
+10
+
+102
+
+cantidad
+
+Figura 6. Detalles_crédito
+
+. Tercera forma normal
+
+Como ya se menciono anteriormente una tabla esta en
+3FN si está en 2FN y, además, no tiene dependencias
+funcionales transitivas entre la clave primaria y sus
+atributos, por lo tanto, el disenio cumple con la tercera
+forma normal al no presentar dependencias transitivas, y
+se han cumplido los requisitos previos.
+De esta manera se ha normalizado el módulo de la base
+de datos del sistema de créditos de la empresa "Aries
+Tech" hasta la tercera forma normal (3FN), evitando la
+redundancia de datos y garantizando la integridad y
+eficiencia de los registros en cada etapa del proceso de
+normalización.
+El ejemplo desarrollado permitio corroborar los
+fundamentos teóricos presentados en este articulo por los
+diferentes autores, concordando en los siguientes
+aspectos:
+· Las técnicas de normalización expuestas serán
+utilizadas a fin de evitar comportamientos
+anómalos en las operaciones y consultas.
+· El proceso de normalización permite eliminar
+redundancias e inconsistencias mejorando la
+calidad del diseño.
+· El diseño de la base de datos es más
+comprensible para los desarrolladores,
+administradores o aquellos usuarios que
+necesitan conocer la base de datos de cualquier
+proyecto tecnológico.
+
+Conclusiones
+Al finalizar la revision bibliografica sobre el tema de
+normalización de bases de datos relacionales se puede
+concluir que la implementación de las formas normales en
+una base de datos proporciona estabilidad, seguridad,
+eliminación de redundancias y facilidad para realizar
+
+modificaciones a la base de datos logrando que el diseño
+de esta sea más robusto.
+Por otro lado, es importante destacar que la normalización
+no es una solución que se utilice para todos los casos en
+la creacion de las bases de datos y debe aplicarse
+considerando las necesidades especificas de cada
+proyecto.
+En suma, una base de datos correctamente diseñiada y
+normalizada constituye el fundamento esencial para el
+desarrollo de sistemas de información o cualquier otro
+producto de software confiable y eficiente.
+
+Referencias
+
+[1] Pacheco, M. Unidades de Apoyo para el Aprendizaje. Normalización de
+Baes de Dutoe. 2008
+
+[2] Mietinez López ML, Gallegos Ruiz A. Progeamación de Bases de Dutos
+Reiaciomales (MF0226_3). Orupo Editorial RA-MA: 2018
+
+[3] Hueso Ibatez L. Gestion de bases de datos. Grupo Editorial RA-MA
+E&torial, 2000.
+
+[4] Sentiso, J M J; Nichita, P. Disetio de bases de datos relacionales con
+DBDStudio. Actas de las Jomadas sobre la Enseflanza Liniversitaria de
+la Informitica (JENUI), 2018; (3): 135-140.
+
+[s] Gimlnez, J A. Bumma prictican en el diseno de bases de
+dttos. ARANDU UTIC, 2019, 6(1): 193-210.
+
+[6] Martin, Y E; Martinez, M E P. Sistema para la integración del proceso
+de normalización de baes de datos relacionales con gestoees de booes
+de datos (SINORGES). Revista Avancer en Sistemar e bryormitica,
+2010; 7(3): 17-25.
+
+[7] Dominguez Moguel, E. A. Normalización de Bases de Datos.
+Uiivendad Teenolbgica de Campeche, 2018.
+
+[8] Satos, Yunieski Fabregas Facultad 3. Diss. Universidad de las
+Ciencins Indoeminicas, 2007.
+
+[9] Cods, E. F. A Relational Model of Data Sor Large Shared Data Banks.
+Comemiestioes of the ACM, 1970; 13(6): 377-387.
