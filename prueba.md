@@ -449,4 +449,176 @@ SELECT m.id_mascota, m.nombre,
        COUNT(DISTINCT o.id_ocupacion) AS ocupaciones_diferentes
 FROM Mascota m
 JOIN Adopta a ON m.id_mascota = a.id_mascota
-JOIN Adoptante ad ON a.id_persona = ad.i
+JOIN Adoptante ad ON a.id_persona = ad.id_persona
+JOIN Ocupacion o ON ad.id_ocupacion = o.id_ocupacion
+GROUP BY m.id_mascota, m.nombre
+HAVING COUNT(DISTINCT o.id_ocupacion) >= 2;
+```
+**Descripción:** Identifica mascotas que han tenido interés de adoptantes de múltiples ocupaciones profesionales.
+
+---
+
+#### Consultas 12–15 — Operaciones de Control (DCL/DDL)
+
+| # | Operación | Descripción |
+|---|---|---|
+| 12 | REVOKE (simulado) | Reporte estático de permisos por tipo de usuario del sistema |
+| 13 | ALTER (historial) | Historial de cambios de estado de adopción por mascota (CASE WHEN) |
+| 14 | GRANT (resumen) | Resumen de accesos y privilegios especiales agrupados por rol |
+| 15 | DROP (incompletos) | Detección de mascotas con campos NULL o sin imagen asignada |
+
+---
+
+### 6.2 Tablas, Relaciones, Consultas, Informes
+
+#### Tablas del sistema
+
+El sistema cuenta con **15 tablas** organizadas en tres categorías:
+
+**Tablas de catálogo (7):**
+
+| Tabla | Columnas principales | Registros de prueba |
+|---|---|---|
+| `Sexo` | id_sexo, descripcion | 10 (Macho, Hembra, Esterilizado/a) |
+| `Raza` | id_raza, descripcion | 10 (Labrador, Pastor Alemán, Golden, etc.) |
+| `Rol` | id_rol, descripcion | 10 (Voluntario, Veterinario, Coordinador, etc.) |
+| `Ocupacion` | id_ocupacion, descripcion | 10 (Ingeniero, Médico, Docente, etc.) |
+| `EstadoAdopcion` | id_estado_adopcion, descripcion | 10 (Disponible, En proceso, Adoptada) |
+| `EstadoProcesoAdopcion` | id_estado_proceso, descripcion | 10 (Solicitada, En evaluación, Aprobada, etc.) |
+| `EstadoHabilitacion` | id_estado_habilitacion, descripcion | 10 (Habilitado, No habilitado, En evaluación) |
+
+**Tablas principales (4):**
+
+| Tabla | Columnas principales | Registros de prueba |
+|---|---|---|
+| `Persona` | id_persona, nombre, telefono, correo_electronico | 10 |
+| `Mascota` | id_mascota, nombre, id_sexo, id_raza, fecha_nacimiento, id_estado_adopcion, imagen | 10 |
+| `Rescatista` | id_persona (PK+FK), id_rol | 10 |
+| `Adoptante` | id_persona (PK+FK), direccion, id_ocupacion, id_estado_habilitacion | 10 |
+
+**Tablas transaccionales (4):**
+
+| Tabla | Columnas principales | Registros de prueba |
+|---|---|---|
+| `ValoracionMedica` | id_valoracion, id_mascota, fecha_revision, diagnostico, tratamiento, observaciones | 10 |
+| `Vacuna` | id_vacuna, id_valoracion, nombre_vacuna, dosis, fecha_aplicacion | 10 |
+| `Rescate` | id_rescate, id_mascota, id_persona, fecha_rescate, ubicacion_rescate, historia_rescate | 10 |
+| `Adopta` | id_adopcion, id_mascota, id_persona, fecha_solicitud, fecha_entrega, id_estado_proceso | 10 |
+
+#### Relaciones principales
+
+```
+Persona         ────────  Rescatista      (1:1, especialización — hereda id_persona)
+Persona         ────────  Adoptante       (1:1, especialización — hereda id_persona)
+Persona         ────────  Rescate         (1:N, un rescatista rescata muchas mascotas)
+Persona         ────────  Adopta          (1:N, un adoptante solicita varias adopciones)
+Mascota         ────────  Rescate         (1:N, historial de rescates por mascota)
+Mascota         ────────  Adopta          (1:N, varias solicitudes por mascota)
+Mascota         ────────  ValoracionMedica (1:N, múltiples revisiones médicas)
+ValoracionMedica ───────  Vacuna          (1:N, una revisión registra múltiples vacunas)
+Mascota         ────────  Sexo            (N:1, catálogo)
+Mascota         ────────  Raza            (N:1, catálogo)
+Mascota         ────────  EstadoAdopcion  (N:1, catálogo)
+Rescatista      ────────  Rol             (N:1, catálogo)
+Adoptante       ────────  Ocupacion       (N:1, catálogo)
+Adoptante       ────────  EstadoHabilitacion (N:1, catálogo)
+Adopta          ────────  EstadoProcesoAdopcion (N:1, catálogo)
+```
+
+#### Vistas — Informes predefinidos
+
+El sistema define **19 vistas SQL** que actúan como informes reutilizables:
+
+**Vistas de rol (4):**
+
+| Vista | Público objetivo | Datos mostrados |
+|---|---|---|
+| `vista_administrador` | Administrador | Totales globales: mascotas, adoptantes, rescatistas, adopciones con subtotales por estado |
+| `vista_veterinario` | Veterinario | Mascotas con última revisión médica, diagnóstico, tratamiento, vacunas y edad calculada |
+| `vista_adopciones` | Personal adopciones | Adopciones con mascota, adoptante, contacto, estado y días en proceso |
+| `vista_rescatista` | Rescatista | Mascotas rescatadas con historial, rescatista asignado y total de revisiones médicas |
+
+**Vistas de consultas especiales (15):**
+
+`consulta_inner_join`, `consulta_group_by`, `consulta_subquery`, `consulta_multiple_join`,
+`consulta_reunion_natural`, `consulta_producto_cartesiano`, `consulta_diferencia`,
+`consulta_intersect`, `consulta_proyeccion`, `consulta_asignacion`, `consulta_division`,
+`consulta_revoke`, `consulta_alter`, `consulta_grant`, `consulta_drop`.
+
+---
+
+### 6.3 Prototipo Funcional de la Base de Datos
+
+El prototipo funcional del sistema **Adóptame** está completamente implementado y operativo. Se describe a continuación cada componente funcional:
+
+#### Estado de implementación
+
+| Componente | Estado | Detalle |
+|---|---|---|
+| Esquema de BD completo | IMPLEMENTADO | 15 tablas con FK, constraints e índices |
+| Datos de prueba | IMPLEMENTADO | 10 registros por tabla (160+ registros totales) |
+| Vistas por rol | IMPLEMENTADO | 4 vistas activas (admin, veterinario, adopciones, rescatista) |
+| Consultas especiales | IMPLEMENTADO | 15 vistas SQL cubriendo álgebra relacional completa |
+| CRUD Mascotas | IMPLEMENTADO | Alta, edición, eliminación y listado con imagen |
+| CRUD Adopciones | IMPLEMENTADO | Registro y seguimiento de solicitudes de adopción |
+| Listado Adoptantes | IMPLEMENTADO | Con estado de habilitación visible |
+| Listado Rescatistas | IMPLEMENTADO | Con rol asignado |
+| Subida de imágenes | IMPLEMENTADO | JPG/PNG/GIF/WEBP, máximo 5 MB por archivo |
+| Panel administrador | IMPLEMENTADO | Estadísticas globales en tiempo real |
+| Panel veterinario | IMPLEMENTADO | Historial médico y vacunación por mascota |
+| Panel rescatista | IMPLEMENTADO | Mascotas rescatadas y total de revisiones |
+| Panel adopciones | IMPLEMENTADO | Estado y días transcurridos de cada adopción |
+
+#### Estructura del prototipo
+
+```
+adoptame/
+├── config.php                  <- Configuracion y conexion MySQL (puerto 3307)
+├── index.php                   <- Portal principal con acceso a todos los modulos
+├── header.php                  <- Cabecera reutilizable (Bootstrap + Font Awesome)
+├── footer.php                  <- Pie de pagina
+├── mascotas.php                <- Listado de mascotas con imagenes
+├── mascota_agregar.php         <- Formulario para añadir mascota
+├── mascota_editar.php          <- Formulario para editar mascota existente
+├── adopciones.php              <- Gestion de adopciones
+├── adoptantes.php              <- Gestion de adoptantes
+├── rescatistas.php             <- Gestion de rescatistas
+├── consultas.php               <- Visualizador de 15 consultas SQL especiales
+├── vista_admin.php             <- Panel administrador (estadisticas globales)
+├── vista_adopciones.php        <- Panel personal de adopciones
+├── vista_veterinario.php       <- Panel veterinario (revisiones medicas)
+├── vista_rescatista.php        <- Panel rescatista
+├── uploads/mascotas/           <- Directorio de imagenes de mascotas
+└── CodigoSQL/
+    ├── Create_Insert.sql       <- DDL completo + DML (datos) + Vistas de rol
+    └── consultas.sql           <- 15 vistas de consultas especiales
+```
+
+#### Instrucciones de despliegue del prototipo
+
+1. Instalar **XAMPP** y activar los módulos Apache y MySQL.
+2. Copiar la carpeta `adoptame/` en `c:\xampp\htdocs\`.
+3. Acceder a **phpMyAdmin** (`http://localhost/phpmyadmin`) y crear la base de datos `adoptame`.
+4. Importar y ejecutar `CodigoSQL/Create_Insert.sql` para crear las tablas, insertar datos y crear las vistas de rol.
+5. Importar y ejecutar `CodigoSQL/consultas.sql` para crear las 15 vistas de consultas especiales.
+6. Navegar a: `http://localhost/adoptame/`
+
+#### URLs de acceso al sistema
+
+| Módulo | URL |
+|---|---|
+| Inicio / Panel principal | `http://localhost/adoptame/index.php` |
+| Mascotas | `http://localhost/adoptame/mascotas.php` |
+| Adopciones | `http://localhost/adoptame/adopciones.php` |
+| Adoptantes | `http://localhost/adoptame/adoptantes.php` |
+| Rescatistas | `http://localhost/adoptame/rescatistas.php` |
+| Vista Administrador | `http://localhost/adoptame/vista_admin.php` |
+| Vista Veterinario | `http://localhost/adoptame/vista_veterinario.php` |
+| Vista Rescatista | `http://localhost/adoptame/vista_rescatista.php` |
+| Vista Adopciones | `http://localhost/adoptame/vista_adopciones.php` |
+| Consultas SQL (1-15) | `http://localhost/adoptame/consultas.php?vista=consulta_inner_join` |
+
+---
+
+*Documento generado para el proyecto Adoptame — Sistema de Gestion de Adopciones Caninas*
+*Base de datos: `adoptame` | Motor: MySQL 8.x | Backend: PHP 8.x | Servidor: Apache/XAMPP*
